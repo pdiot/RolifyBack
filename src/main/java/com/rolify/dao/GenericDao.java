@@ -1,4 +1,4 @@
-package com.monapp.dao;
+package com.rolify.dao;
 
 import java.io.Serializable;
 import java.util.List;
