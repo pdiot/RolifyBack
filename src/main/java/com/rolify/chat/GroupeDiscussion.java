@@ -72,6 +72,9 @@ public class GroupeDiscussion {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void addUtilisateur(Utilisateur utilisateur) {
+		this.utilisateurs.add(utilisateur);
+	}
 	
 
 }
