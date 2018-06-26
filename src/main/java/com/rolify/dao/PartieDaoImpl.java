@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rolify.entity.Partie;
 import com.rolify.entity.Personnage;
+import com.rolify.entity.Utilisateur;
 
 
 
@@ -59,21 +61,32 @@ public class PartieDaoImpl implements PartieDao{
 	}
 
 	@Override
-	public List<Partie> findByMj(String idMj) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Partie> findByMj(Utilisateur utilisateurMj) {
+		String querystring = "select p from Partie p where p.mj == ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, utilisateurMj.getId());
+		
+		return (List<Partie>) query.getResultList();
+		
 	}
 
 	@Override
-	public List<Partie> findByJoueur(String idJoueur) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Partie> findByJoueur(Utilisateur joueur) {
+		String querystring = "select p from Partie p where p.joueurs == ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, joueur.getId());
+		
+		return (List<Partie>) query.getResultList();
 	}
 
 	@Override
 	public Partie findByPersonnage(Personnage personnage) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String querystring = "select p from Partie p where p.personnages == ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, personnage.getId());
+		
+		return (Partie) query.getResultList();
 	}
 
 }
