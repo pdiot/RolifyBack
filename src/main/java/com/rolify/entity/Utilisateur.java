@@ -95,21 +95,19 @@ public class Utilisateur {
 		this.partiesJoueur = new HashSet<Partie>();
 	}
 	
-	public void ajouterPartieJoueur(Partie partie) {
-		this.partiesJoueur.add(partie);
-		partie.addJoueur(this);
-	}
+	public void ajouterPartieJoueur(Partie partie) { //crée association entre un joueur et une partie
+	    this.partiesJoueur.add(partie); 
+	    partie.addJoueur(this); 
+	 } 
 	
 	public void ajouterPartieMJ(Partie partie) {
-		// TODO
-	}
-	
-	public void joinPartieJoueur(Partie partie) {
-		// TODO
+		this.partiesMJ.add(partie);
+		partie.addMJ(this);
 	}
 	
 	public void joinDiscussion(GroupeDiscussion groupe) {
-		// TODO
+		this.groupes.add(groupe);
+		groupe.addUtilisateur(this);
 	}
 	
 	

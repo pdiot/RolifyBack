@@ -190,6 +190,11 @@ public class Personnage {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	 
+	public void ajouterPartiePersonnage(Partie partie) { //crée association entre un personnage et une partie
+	    this.partie = partie; 
+	    partie.addPersonnage(this); 
+	}
+	
 	
 }

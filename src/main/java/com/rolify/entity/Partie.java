@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.rolify.chat.GroupeDiscussion;
 import com.rolify.chat.Message;
 import com.rolify.chat.MessagePartie;
 
@@ -126,6 +127,13 @@ public class Partie {
 	public void addJoueur(Utilisateur joueur) {
 		this.joueurs.add(joueur);
 	}
- 	
+	
+	public void addPersonnage(Personnage personnage) { 
+	    this.personnages.add(personnage); 
+  	} 
+	
+	public void addMJ(Utilisateur mj) {
+		this.mj=mj; //car on ne fait que du add pour des listes
+	}
 	
 }
