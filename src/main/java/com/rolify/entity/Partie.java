@@ -1,5 +1,6 @@
 package com.rolify.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -113,9 +114,12 @@ public class Partie {
 
 	public Partie() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.joueurs = new HashSet<Utilisateur>();
 	}
 
-	
+	public void addJoueur(Utilisateur joueur) {
+		this.joueurs.add(joueur);
+	}
+ 	
 	
 }
