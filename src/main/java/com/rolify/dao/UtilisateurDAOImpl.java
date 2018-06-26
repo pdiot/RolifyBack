@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -64,8 +65,12 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur findMjByPartie(Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String querystring = "select u from Utilisateur u where u == ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, partie.getMj());
+		
+		return (Utilisateur) query.getSingleResult();
 	}
 
 	@Override
