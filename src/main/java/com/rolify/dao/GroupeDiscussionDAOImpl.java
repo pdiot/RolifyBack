@@ -1,4 +1,3 @@
-import javax.persistence.EntityManager;
 package com.rolify.dao;
 
 import java.util.List;
