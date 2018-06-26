@@ -44,14 +44,16 @@ public class MesageGlobalDAOImpl implements MessageGlobalDAO {
 		
 	}
 	
-	@Override
-	public MessageGlobal findByPrimaryKey(String id) {
-		return em.find(MessageGlobal.class, id);
-	}
 
 	@Override
 	public MessageGlobal update(MessageGlobal entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public MessageGlobal findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

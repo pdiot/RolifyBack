@@ -44,14 +44,18 @@ public class MesagePriveDAOImpl implements MessagePriveDAO {
 		
 	}
 	
-	@Override
-	public MessagePrive findByPrimaryKey(String id) {
-		return em.find(MessagePrive.class, id);
-	}
 
 	@Override
 	public MessagePrive update(MessagePrive entity) {
 		return em.merge(entity);
 	}
+
+	@Override
+	public MessagePrive findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

@@ -47,14 +47,16 @@ public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPa
 		
 	}
 	
-	@Override
-	public AssociationPartieUtilisateurPersonnage findByPrimaryKey(String id) {
-		return em.find(AssociationPartieUtilisateurPersonnage.class, id);
-	}
 
 	@Override
 	public AssociationPartieUtilisateurPersonnage update(AssociationPartieUtilisateurPersonnage entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public AssociationPartieUtilisateurPersonnage findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -44,14 +44,16 @@ public class GroupeDiscussionDAOImpl implements GroupeDiscussionDAO {
 		
 	}
 	
-	@Override
-	public GroupeDiscussion findByPrimaryKey(String id) {
-		return em.find(GroupeDiscussion.class, id);
-	}
 
 	@Override
 	public GroupeDiscussion update(GroupeDiscussion entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public GroupeDiscussion findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
