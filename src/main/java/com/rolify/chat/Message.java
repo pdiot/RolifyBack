@@ -35,4 +35,38 @@ public abstract class Message {
 	@Column(length = 300)
 	private String body;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Utilisateur getSource() {
+		return source;
+	}
+
+	public void setSource(Utilisateur source) {
+		this.source = source;
+	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+	
+	
+
 }

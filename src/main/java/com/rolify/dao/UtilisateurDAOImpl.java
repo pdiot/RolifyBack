@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rolify.chat.GroupeDiscussion;
 import com.rolify.chat.Message;
+import com.rolify.chat.MessageGlobal;
 import com.rolify.entity.Partie;
 import com.rolify.entity.Personnage;
 import com.rolify.entity.Utilisateur;
@@ -35,7 +36,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		System.out.println("Avant select");
 		crit.select(r);
 
-		System.out.println("Après select");
+		System.out.println("Aprï¿½s select");
 		
 		return em.createQuery(crit).getResultList();
 	}
@@ -75,14 +76,25 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public List<Utilisateur> findJoueursByPartie(Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String querystring = "select p.joueurs from Partie p where p.id == ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, partie.getId());
+		
+		return (List<Utilisateur>) query.getResultList();
+		
+		
 	}
 
 	@Override
 	public List<Utilisateur> findUtilisateurByDiscussion(GroupeDiscussion groupe) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String querystring = "select d.utilisateur from Utilisateur d where d.id == ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, groupe.getId());
+		
+		return (List<Utilisateur>) query.getResultList();
+		
 	}
 
 	@Override
@@ -93,8 +105,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur findUtilisateurByMessage(Message message) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String querystring = "select m.utilisateur from Utilisateur m where m.id == ?1";  //?1 = Parameter
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, message.getId()); //set Parameter here
+		
+		return (Utilisateur) query.getSingleResult();
+		
 	}
 	
 
