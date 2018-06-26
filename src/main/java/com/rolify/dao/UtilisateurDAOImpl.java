@@ -11,7 +11,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.rolify.chat.GroupeDiscussion;
+import com.rolify.chat.Message;
 import com.rolify.entity.Partie;
+import com.rolify.entity.Personnage;
 import com.rolify.entity.Utilisateur;
 
 @Transactional
@@ -58,23 +61,37 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	public Utilisateur update(Utilisateur entity) {
 		return em.merge(entity);
 	}
-	
-	@Override
-	public void becomeMJ(Utilisateur util, Partie partie) {
-		// TODO
-	}
 
 	@Override
-	public void joinPartie(Utilisateur util, Partie partie) {
-		// TODO
-		
-	}
-
-	@Override
-	public List<Partie> findParties(Utilisateur util) {
+	public Utilisateur findMjByPartie(Partie partie) {
 		// TODO Auto-generated method stub
-		// Doit renvoyer la liste des parties dans lesquelles util est joueur
 		return null;
 	}
+
+	@Override
+	public List<Utilisateur> findJoueursByPartie(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Utilisateur> findUtilisateurByDiscussion(GroupeDiscussion groupe) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Utilisateur findUtilisateurByPersonnage(Personnage personnage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Utilisateur findUtilisateurByMessage(Message message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
 
 }

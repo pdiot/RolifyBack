@@ -13,9 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
 
-
-
-
 @Transactional
 @Repository
 public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPartieUtilisateurPersonnageDao {
@@ -55,12 +52,6 @@ public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPa
 	@Override
 	public AssociationPartieUtilisateurPersonnage update(AssociationPartieUtilisateurPersonnage entity) {
 		return em.merge(entity);
-	}
-
-	@Override
-	public AssociationPartieUtilisateurPersonnage findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
