@@ -12,6 +12,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
+import com.rolify.entity.Partie;
+import com.rolify.entity.Personnage;
+import com.rolify.entity.Utilisateur;
 
 @Transactional
 @Repository
@@ -52,6 +55,42 @@ public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPa
 	@Override
 	public AssociationPartieUtilisateurPersonnage update(AssociationPartieUtilisateurPersonnage entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public AssociationPartieUtilisateurPersonnage findByPersonnage(Personnage personnage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AssociationPartieUtilisateurPersonnage> findByPartie(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AssociationPartieUtilisateurPersonnage> findByJoueur(Utilisateur utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AssociationPartieUtilisateurPersonnage findByJoueurPartie(Utilisateur utilisateur, Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AssociationPartieUtilisateurPersonnage> findByMj(Utilisateur utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AssociationPartieUtilisateurPersonnage> findByMjPartie(Utilisateur utilisateur, Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

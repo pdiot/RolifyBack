@@ -11,11 +11,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.rolify.chat.GroupeDiscussion;
 import com.rolify.chat.MessagePrive;
 
 @Transactional
 @Repository
-public class MesagePriveDAOImpl implements MessagePriveDAO {
+public class MessagePriveDAOImpl implements MessagePriveDAO {
 
 	@PersistenceContext
 	EntityManager em;
@@ -52,6 +53,18 @@ public class MesagePriveDAOImpl implements MessagePriveDAO {
 
 	@Override
 	public MessagePrive findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MessagePrive> findByGroupe(GroupeDiscussion groupe) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MessagePrive> findSinceIdForGroupe(Integer dernierId, GroupeDiscussion groupe) {
 		// TODO Auto-generated method stub
 		return null;
 	}

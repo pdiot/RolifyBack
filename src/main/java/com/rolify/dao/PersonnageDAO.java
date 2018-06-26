@@ -10,6 +10,6 @@ public interface PersonnageDAO extends GenericDao<Personnage, Integer> {
 	public List<Personnage> findByPartie(Partie partie);
 	public List<Personnage> findByJoueur(Utilisateur joueur);
 	public List<Personnage> findByMJ(Utilisateur mj);
-	public List<Personnage> findByPartieJoueur(Partie partie, Utilisateur joueur);
+	public Personnage findByPartieJoueur(Partie partie, Utilisateur joueur);
 	public List<Personnage> findByPartieMj(Partie partie, Utilisateur mj);
 }

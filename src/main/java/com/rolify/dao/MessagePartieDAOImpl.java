@@ -12,10 +12,11 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.rolify.chat.MessagePartie;
+import com.rolify.entity.Partie;
 
 @Transactional
 @Repository
-public class MesagePartieDAOImpl implements MessagePartieDAO {
+public class MessagePartieDAOImpl implements MessagePartieDAO {
 
 	@PersistenceContext
 	EntityManager em;
@@ -52,6 +53,18 @@ public class MesagePartieDAOImpl implements MessagePartieDAO {
 	@Override
 	public MessagePartie update(MessagePartie entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public List<MessagePartie> findByPartie(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MessagePartie> findSinceIdForGroupe(Integer dernierId, Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
