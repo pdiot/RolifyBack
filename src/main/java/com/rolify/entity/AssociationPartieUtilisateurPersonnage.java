@@ -24,6 +24,15 @@ public class AssociationPartieUtilisateurPersonnage {
 	@ManyToOne
 	@JsonView(Views.Common.class)
 	private Personnage personnage;
+	
+	private String role;
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public int getId() {
 		return id;
 	}

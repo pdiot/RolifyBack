@@ -1,7 +1,10 @@
 package com.rolify.dao;
 
+import java.util.List;
+
 import com.rolify.entity.Partie;
 
-public interface PartieDao extends GenericDao <Partie, String> {
-
+public interface PartieDao extends GenericDao <Partie, Integer> {
+	public List<Partie> findByMj(String idMj);
+	public List<Partie> findByJoueur(String idJoueur);
 }

@@ -98,6 +98,18 @@ public class Utilisateur {
 		partie.addJoueur(this);
 	}
 	
+	public void ajouterPartieMJ(Partie partie) {
+		// TODO
+	}
+	
+	public void joinPartieJoueur(Partie partie) {
+		// TODO
+	}
+	
+	public void joinDiscussion(GroupeDiscussion groupe) {
+		// TODO
+	}
+	
 	
 	
 }

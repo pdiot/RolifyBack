@@ -48,13 +48,25 @@ public class PartieDaoImpl implements PartieDao{
 	}
 	
 	@Override
-	public Partie findByPrimaryKey(String id) {
+	public Partie findByPrimaryKey(Integer id) {
 		return em.find(Partie.class, id);
 	}
 
 	@Override
 	public Partie update(Partie entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public List<Partie> findByMj(String idMj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Partie> findByJoueur(String idJoueur) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
