@@ -75,7 +75,7 @@ public class PersonnageDAOImpl implements PersonnageDAO {
 	}
 
 	@Override
-	public List<Personnage> findByPartieJoueur(Partie partie, Utilisateur joueur) {
+	public Personnage findByPartieJoueur(Partie partie, Utilisateur joueur) {
 		// TODO Auto-generated method stub
 		return null;
 	}

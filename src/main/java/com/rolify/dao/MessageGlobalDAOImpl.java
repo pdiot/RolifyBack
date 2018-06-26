@@ -15,7 +15,7 @@ import com.rolify.chat.MessageGlobal;
 
 @Transactional
 @Repository
-public class MesageGlobalDAOImpl implements MessageGlobalDAO {
+public class MessageGlobalDAOImpl implements MessageGlobalDAO {
 
 	@PersistenceContext
 	EntityManager em;
@@ -52,6 +52,12 @@ public class MesageGlobalDAOImpl implements MessageGlobalDAO {
 
 	@Override
 	public MessageGlobal findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MessageGlobal> findSinceLast(Integer dernierId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

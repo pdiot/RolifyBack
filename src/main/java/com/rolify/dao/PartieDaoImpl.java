@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rolify.entity.Partie;
+import com.rolify.entity.Personnage;
 
 
 
@@ -65,6 +66,12 @@ public class PartieDaoImpl implements PartieDao{
 
 	@Override
 	public List<Partie> findByJoueur(String idJoueur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Partie findByPersonnage(Personnage personnage) {
 		// TODO Auto-generated method stub
 		return null;
 	}

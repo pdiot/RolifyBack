@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.rolify.chat.GroupeDiscussion;
+import com.rolify.entity.Utilisateur;
 
 @Transactional
 @Repository
@@ -52,6 +53,12 @@ public class GroupeDiscussionDAOImpl implements GroupeDiscussionDAO {
 
 	@Override
 	public GroupeDiscussion findByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GroupeDiscussion> findByUtilisateur(Utilisateur utilisateur) {
 		// TODO Auto-generated method stub
 		return null;
 	}
