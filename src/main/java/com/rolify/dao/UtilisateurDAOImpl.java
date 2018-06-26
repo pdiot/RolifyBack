@@ -27,6 +27,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		
 		crit.select(r);
 		
+		
 		return em.createQuery(crit).getResultList();
 	}
 
