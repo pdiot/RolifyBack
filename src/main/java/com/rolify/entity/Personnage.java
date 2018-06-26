@@ -2,6 +2,7 @@ package com.rolify.entity;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +19,16 @@ public class Personnage {
 	@JsonView(Views.Common.class)
 	private int id;
 	@JsonView(Views.Common.class)
+	@Column(length = 20)
 	private String nom;
 	@JsonView(Views.Common.class)
+	@Column(length = 20)
 	private String classe;
 	@JsonView(Views.Common.class)
+	@Column(length = 20)
 	private String race;
 	@JsonView(Views.Common.class)
+	@Column(length = 20)
 	private String sexe;
 	@JsonView(Views.Common.class)
 	private int pv;
@@ -38,12 +43,14 @@ public class Personnage {
 	@JsonView(Views.Common.class)
 	private int initiative;
 	@JsonView(Views.Common.class)
+	@Column(length = 4000)
 	private String equipement;
 	@JsonView(Views.Common.class)
+	@Column(length = 400)
 	private String inventaire;
 	@JsonView(Views.Common.class)
+	@Column(length = 4000)
 	private String background;
-	@JsonView(Views.Common.class)
 
 	@OneToMany (mappedBy="personnage")
 	private Set<AssociationPartieUtilisateurPersonnage> associations;

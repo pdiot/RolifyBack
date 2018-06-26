@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.rolify.enums.Role;
 
 @Entity
 public class AssociationPartieUtilisateurPersonnage {
@@ -25,12 +26,12 @@ public class AssociationPartieUtilisateurPersonnage {
 	@JsonView(Views.Common.class)
 	private Personnage personnage;
 	
-	private String role;
+	private Role role;
 	
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	public int getId() {
@@ -60,6 +61,19 @@ public class AssociationPartieUtilisateurPersonnage {
 	public AssociationPartieUtilisateurPersonnage() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	   * Associer une partie, un personnage et un utilisateur. 
+	   * Le role indique s'il s'agit d'un PJ ou d'un personnage MJ
+	   * @param role 	Le role du personnage
+	   * 				Soit 'MJ', soit 'JOUEUR'
+	   */
+	public AssociationPartieUtilisateurPersonnage(Partie partie, Utilisateur utilisateur, Personnage personnage, Role role) {
+		this.partie = partie;
+		this.utilisateur = utilisateur;
+		this.personnage = personnage;
+		this.role = role;
 	}
 
 	

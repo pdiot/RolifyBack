@@ -3,6 +3,7 @@ package com.rolify.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,9 +29,14 @@ public class Partie {
 	private Utilisateur mj;
 
 	@JsonView(Views.Common.class)
+	@Column(length = 500)
 	private String image;
 	@JsonView(Views.Common.class)
+	@Column(length = 100)
 	private String titre;
+	@JsonView(Views.Common.class)
+	@Column(length = 4000)
+	private String description;
 	
 	@ManyToMany (mappedBy="partiesJoueur")
 	@JsonView(Views.Common.class)

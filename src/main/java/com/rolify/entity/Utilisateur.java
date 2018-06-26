@@ -3,6 +3,7 @@ package com.rolify.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ public class Utilisateur {
 	
 	@Id
 	@JsonView(Views.Common.class)
+	@Column(length = 1024)
 	private String id;
 	
 	@OneToMany (mappedBy="utilisateur", fetch=FetchType.EAGER)

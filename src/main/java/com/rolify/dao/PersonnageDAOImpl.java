@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.rolify.entity.Partie;
 import com.rolify.entity.Personnage;
 import com.rolify.entity.Utilisateur;
 
@@ -53,6 +54,36 @@ public class PersonnageDAOImpl implements PersonnageDAO {
 	@Override
 	public Personnage update(Personnage entity) {
 		return em.merge(entity);
+	}
+
+	@Override
+	public List<Personnage> findByPartie(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Personnage> findByJoueur(Utilisateur joueur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Personnage> findByMJ(Utilisateur mj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Personnage> findByPartieJoueur(Partie partie, Utilisateur joueur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Personnage> findByPartieMj(Partie partie, Utilisateur mj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
