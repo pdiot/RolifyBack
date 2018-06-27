@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.dao.PartieDao;
 import com.rolify.entity.Partie;
+import com.rolify.entity.Views;
 
 @CrossOrigin
 @RestController
@@ -24,6 +26,7 @@ public class PartieController {
 	@Autowired
 	PartieDao partieDao;
 	
+	@JsonView(Views.PartieWithAll.class)
 	@GetMapping("/api/parties")
 	public ResponseEntity<List<Partie>> findAll() {
 		List<Partie> woners = partieDao.findAll();
@@ -32,6 +35,7 @@ public class PartieController {
 	}
 	
 	@GetMapping("/api/parties/{id}")
+	@JsonView(Views.PartieWithAll.class)
 	public ResponseEntity<Partie> findOne(@PathVariable("id") Integer id) {
 		Partie ownr = partieDao.findByPrimaryKey(id);
 		
@@ -43,6 +47,7 @@ public class PartieController {
 	}
 	
 	@DeleteMapping("/api/parties/{id}")
+	@JsonView(Views.PartieWithAll.class)
 	public ResponseEntity<Partie> delete(@PathVariable("id") Integer id) {
 		Partie ownr = partieDao.findByPrimaryKey(id);
 		
@@ -54,6 +59,7 @@ public class PartieController {
 	}
 	
 	@PostMapping("/api/parties")
+	@JsonView(Views.PartieWithAll.class)
 	public ResponseEntity<Partie> create(@RequestBody Partie user) {
 		
 		if (user.getId() > 0) {
@@ -67,6 +73,7 @@ public class PartieController {
 	}
 	
 	@PutMapping("/api/parties")
+	@JsonView(Views.PartieWithAll.class)
 	public ResponseEntity<Partie> update(@RequestBody Partie user) {
 		Partie ch = partieDao.findByPrimaryKey(user.getId());		
 		if (ch == null) {

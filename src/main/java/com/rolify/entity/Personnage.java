@@ -54,15 +54,13 @@ public class Personnage {
 	@Column(length = 4000)
 	private String background;
 
+	@JsonView(Views.PersonnageWithAssociation.class)
 	@OneToMany (mappedBy="personnage", fetch=FetchType.EAGER)
 	private Set<AssociationPartieUtilisateurPersonnage> associations;
 
-	
-	@ManyToOne
-	private Partie partie;
-
 	public Personnage() {
 		super();
+		this.id = 0;
 		this.associations = new HashSet<AssociationPartieUtilisateurPersonnage>();
 	}
 	
@@ -114,12 +112,12 @@ public class Personnage {
 		this.pv = pv;
 	}
 
-	public int getForce() {
+	public int getFo() {
 		return fo;
 	}
 
-	public void setForce(int force) {
-		this.fo = force;
+	public void setFo(int fo) {
+		this.fo = fo;
 	}
 
 	public int getDefense() {
@@ -184,19 +182,6 @@ public class Personnage {
 
 	public void setAssociations(Set<AssociationPartieUtilisateurPersonnage> associations) {
 		this.associations = associations;
-	}
-
-	public Partie getPartie() {
-		return partie;
-	}
-
-	public void setPartie(Partie partie) {
-		this.partie = partie;
-	}
-
-	public void ajouterPartiePersonnage(Partie partie) { //crée association entre un personnage et une partie
-	    this.partie = partie; 
-	    partie.addPersonnage(this); 
 	}
 	
 	

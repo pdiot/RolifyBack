@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.dao.UtilisateurDAO;
+import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
 import com.rolify.entity.Utilisateur;
+import com.rolify.entity.Views;
 
 @CrossOrigin
 @RestController
@@ -23,13 +26,15 @@ public class UtilisateurController {
 
 	@Autowired
 	UtilisateurDAO utilDao;
-	
+
+	@JsonView(Views.UtilisateurWithAll.class)
 	@GetMapping("/api/utilisateurs")
 	public ResponseEntity<List<Utilisateur>> findAll() {
 		List<Utilisateur> woners = utilDao.findAll();
 		return new ResponseEntity<List<Utilisateur>>(woners, HttpStatus.OK);
 	}
-	
+
+	@JsonView(Views.UtilisateurWithAll.class)
 	@GetMapping("/api/utilisateurs/{id}")
 	public ResponseEntity<Utilisateur> findOne(@PathVariable("id") String id) {
 		Utilisateur ownr = utilDao.findByPrimaryKey(id);
@@ -40,7 +45,8 @@ public class UtilisateurController {
 		
 		return new ResponseEntity<Utilisateur>(ownr, HttpStatus.OK);
 	}
-	
+
+	@JsonView(Views.UtilisateurWithAll.class)
 	@DeleteMapping("/api/utilisateurs/{id}")
 	public ResponseEntity<Utilisateur> delete(@PathVariable("id") String id) {
 		Utilisateur ownr = utilDao.findByPrimaryKey(id);
@@ -51,20 +57,21 @@ public class UtilisateurController {
 		utilDao.delete(ownr);
 		return new ResponseEntity<Utilisateur>(ownr, HttpStatus.OK);
 	}
-	
+
+	@JsonView(Views.UtilisateurWithAll.class)
 	@PostMapping("/api/utilisateurs")
 	public ResponseEntity<Utilisateur> create(@RequestBody Utilisateur user) {
 		
-		if (!user.getId().equals("")) {
+		if (utilDao.findByPrimaryKey(user.getId()) != null) {
 			return new ResponseEntity<Utilisateur>(user, HttpStatus.BAD_REQUEST);
 		}
-		
 		utilDao.save(user);
 		
 		return new ResponseEntity<Utilisateur>(user, HttpStatus.OK);
 		
 	}
-	
+
+	@JsonView(Views.UtilisateurWithAll.class)
 	@PutMapping("/api/utilisateurs")
 	public ResponseEntity<Utilisateur> update(@RequestBody Utilisateur user) {
 		Utilisateur ch = utilDao.findByPrimaryKey(user.getId());		

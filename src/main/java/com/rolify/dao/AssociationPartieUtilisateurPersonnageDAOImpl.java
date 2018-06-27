@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -15,10 +16,11 @@ import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
 import com.rolify.entity.Partie;
 import com.rolify.entity.Personnage;
 import com.rolify.entity.Utilisateur;
+import com.rolify.enums.Role;
 
 @Transactional
 @Repository
-public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPartieUtilisateurPersonnageDao {
+public class AssociationPartieUtilisateurPersonnageDAOImpl implements AssociationPartieUtilisateurPersonnageDAO {
 
 	@PersistenceContext
 	EntityManager em;
@@ -58,9 +60,12 @@ public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPa
 	}
 
 	@Override
-	public AssociationPartieUtilisateurPersonnage findByPersonnage(Personnage personnage) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AssociationPartieUtilisateurPersonnage> findByPersonnage(Personnage personnage) {
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.personnage = ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, personnage); //set Parameter here
+		
+		return query.getResultList();
 	}
 
 	@Override
@@ -76,9 +81,15 @@ public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPa
 	}
 
 	@Override
-	public AssociationPartieUtilisateurPersonnage findByJoueurPartie(Utilisateur utilisateur, Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AssociationPartieUtilisateurPersonnage> findByJoueurPartie(Utilisateur utilisateur, Partie partie) {
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.utilisateur = ?1" +
+				 " and a.partie = ?2 and a.role = ?3";  //?1 = Parameter
+				Query query = em.createQuery( querystring ) ;
+				query.setParameter(1, utilisateur); //set Parameter here
+				query.setParameter(2, partie); //set Parameter here
+				query.setParameter(3, Role.JOUEUR); //set Parameter here
+				
+				return query.getResultList();
 	}
 
 	@Override
@@ -91,6 +102,20 @@ public class AssociationPartieUtilisateurPersonnageImpl implements AssociationPa
 	public List<AssociationPartieUtilisateurPersonnage> findByMjPartie(Utilisateur utilisateur, Partie partie) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<AssociationPartieUtilisateurPersonnage> findByPartieUtilisateurPersonnage(Utilisateur utilisateur,
+			Partie partie, Personnage personnage) {
+		
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.utilisateur = ?1" +
+		 " and a.partie = ?2 and a.personnage = ?3";  //?1 = Parameter
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, utilisateur); //set Parameter here
+		query.setParameter(2, partie); //set Parameter here
+		query.setParameter(3, personnage); //set Parameter here
+		
+		return query.getResultList();
 	}
 
 }

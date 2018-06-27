@@ -27,7 +27,7 @@ public class Partie {
 	private int id;
 	
 	@ManyToOne
-	@JsonView(Views.Common.class)
+	@JsonView(Views.PartieWithMJ.class)
 	private Utilisateur mj;
 
 	@JsonView(Views.Common.class)
@@ -39,21 +39,19 @@ public class Partie {
 	@JsonView(Views.Common.class)
 	@Column(length = 4000)
 	private String description;
+	@JsonView(Views.Common.class)
+	private int nombreDeJoueurs;
 	
 	@ManyToMany (mappedBy="partiesJoueur", fetch=FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.PartieWithJoueurs.class)
 	private Set<Utilisateur> joueurs;
 	
 	@OneToMany (mappedBy="partie", fetch= FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.PartieWithAssociations.class)
 	private Set<AssociationPartieUtilisateurPersonnage> associations;
 	
 	@OneToMany (mappedBy="partie", fetch= FetchType.EAGER)
-	@JsonView(Views.Common.class)
-	private Set<Personnage> personnages;
-	
-	@OneToMany (mappedBy="partie", fetch= FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.PartieWithMessages.class)
 	private Set<MessagePartie> messages;
 
 
@@ -61,7 +59,6 @@ public class Partie {
 		super();
 		this.joueurs = new HashSet<Utilisateur>();
 		this.associations = new HashSet<AssociationPartieUtilisateurPersonnage>();
-		this.personnages = new HashSet<Personnage>();
 		this.messages = new HashSet<MessagePartie>();
 	}
 	
@@ -121,14 +118,6 @@ public class Partie {
 		this.associations = associations;
 	}
 
-	public Set<Personnage> getPersonnages() {
-		return personnages;
-	}
-
-	public void setPersonnages(Set<Personnage> personnages) {
-		this.personnages = personnages;
-	}
-
 	public Set<MessagePartie> getMessages() {
 		return messages;
 	}
@@ -141,10 +130,6 @@ public class Partie {
 	public void addJoueur(Utilisateur joueur) {
 		this.joueurs.add(joueur);
 	}
-	
-	public void addPersonnage(Personnage personnage) { 
-	    this.personnages.add(personnage); 
-  	} 
 	
 	public void addMJ(Utilisateur mj) {
 		this.mj=mj; //car on ne fait que du add pour des listes

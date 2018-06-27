@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -52,14 +53,15 @@ public class MessageGlobalDAOImpl implements MessageGlobalDAO {
 
 	@Override
 	public MessageGlobal findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(MessageGlobal.class, id);
 	}
 
 	@Override
 	public List<MessageGlobal> findSinceLast(Integer dernierId) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select a from MessageGlobal a  where a.id > ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, dernierId); //set Parameter here
+		return query.getResultList();
 	}
 
 }

@@ -22,24 +22,33 @@ public class Utilisateur {
 	@Column(length = 512)
 	private String id;
 	
-	@OneToMany (mappedBy="utilisateur", fetch=FetchType.EAGER)
+
 	@JsonView(Views.Common.class)
+	@Column(length = 50)
+	private String pseudo;
+	
+	@JsonView(Views.Common.class)
+	@Column(length = 50)
+	private String urlAvatar;
+	
+	@OneToMany (mappedBy="utilisateur", fetch=FetchType.EAGER)
+	@JsonView(Views.UtilisateurWithAssociations.class)
 	private Set<AssociationPartieUtilisateurPersonnage> associations; 
 	
 	@OneToMany (mappedBy="mj", fetch=FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.UtilisateurWithPartiesMJ.class)
 	private Set<Partie> partiesMJ;
 	
 	@ManyToMany
-	@JsonView(Views.Common.class)
+	@JsonView(Views.UtilisateurWithPartiesJoueur.class)
 	private Set<Partie> partiesJoueur;
 	
 	@OneToMany (mappedBy="source", fetch=FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.UtilisateurWithMessages.class)
 	private Set<Message> messages;
 	
 	@ManyToMany
-	@JsonView(Views.Common.class)
+	@JsonView(Views.UtilisateurWithGroupes.class)
 	private Set<GroupeDiscussion> groupes;
 
 	public Utilisateur() {

@@ -17,15 +17,16 @@ public class AssociationPartieUtilisateurPersonnage {
 	private int id;
 	
 	@ManyToOne
-	@JsonView(Views.Common.class)
+	@JsonView(Views.AssociationWithUtilisateur.class)
 	private Utilisateur utilisateur;
 	@ManyToOne
-	@JsonView(Views.Common.class)
+	@JsonView(Views.AssociationWithPartie.class)
 	private Partie partie;
 	@ManyToOne
-	@JsonView(Views.Common.class)
+	@JsonView(Views.AssociationWithPersonnage.class)
 	private Personnage personnage;
-	
+
+	@JsonView(Views.Common.class)
 	private Role role;
 	
 	public Role getRole() {

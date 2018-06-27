@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.dao.PersonnageDAO;
 import com.rolify.entity.Personnage;
+import com.rolify.entity.Views;
 
 @CrossOrigin
 @RestController
@@ -23,14 +25,16 @@ public class PersonnageController {
 
 	@Autowired
 	PersonnageDAO personnageDao;
-	
+
+	@JsonView(Views.PersonnageWithAssociation.class)
 	@GetMapping("/api/personnages")
 	public ResponseEntity<List<Personnage>> findAll() {
 		List<Personnage> woners = personnageDao.findAll();
 		
 		return new ResponseEntity<List<Personnage>>(woners, HttpStatus.OK);
 	}
-	
+
+	@JsonView(Views.PersonnageWithAssociation.class)
 	@GetMapping("/api/personnages/{id}")
 	public ResponseEntity<Personnage> findOne(@PathVariable("id") Integer id) {
 		Personnage ownr = personnageDao.findByPrimaryKey(id);
@@ -41,7 +45,8 @@ public class PersonnageController {
 		
 		return new ResponseEntity<Personnage>(ownr, HttpStatus.OK);
 	}
-	
+
+	@JsonView(Views.PersonnageWithAssociation.class)
 	@DeleteMapping("/api/personnages/{id}")
 	public ResponseEntity<Personnage> delete(@PathVariable("id") Integer id) {
 		Personnage ownr = personnageDao.findByPrimaryKey(id);
@@ -52,7 +57,8 @@ public class PersonnageController {
 		personnageDao.delete(ownr);
 		return new ResponseEntity<Personnage>(ownr, HttpStatus.OK);
 	}
-	
+
+	@JsonView(Views.PersonnageWithAssociation.class)
 	@PostMapping("/api/personnages")
 	public ResponseEntity<Personnage> create(@RequestBody Personnage user) {
 		
@@ -65,7 +71,8 @@ public class PersonnageController {
 		return new ResponseEntity<Personnage>(user, HttpStatus.OK);
 		
 	}
-	
+
+	@JsonView(Views.PersonnageWithAssociation.class)
 	@PutMapping("/api/personnages")
 	public ResponseEntity<Personnage> update(@RequestBody Personnage user) {
 		Personnage ch = personnageDao.findByPrimaryKey(user.getId());		

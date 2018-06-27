@@ -7,13 +7,13 @@ import com.rolify.entity.Partie;
 import com.rolify.entity.Personnage;
 import com.rolify.entity.Utilisateur;
 
-public interface AssociationPartieUtilisateurPersonnageDao extends GenericDao <AssociationPartieUtilisateurPersonnage, Integer> {
+public interface AssociationPartieUtilisateurPersonnageDAO extends GenericDao <AssociationPartieUtilisateurPersonnage, Integer> {
 	/**
 	 * 
 	 * @param personnage
 	 * @return l'association liée à ce personnage
 	 */
-	public AssociationPartieUtilisateurPersonnage findByPersonnage(Personnage personnage);
+	public List<AssociationPartieUtilisateurPersonnage> findByPersonnage(Personnage personnage);
 	/**
 	 * 
 	 * @param partie
@@ -32,7 +32,7 @@ public interface AssociationPartieUtilisateurPersonnageDao extends GenericDao <A
 	 * @param partie
 	 * @return l'association liée à cet utilisateur et cette partie en tant que joueur
 	 */
-	public AssociationPartieUtilisateurPersonnage findByJoueurPartie(Utilisateur utilisateur, Partie partie);
+	public List<AssociationPartieUtilisateurPersonnage> findByJoueurPartie(Utilisateur utilisateur, Partie partie);
 	/**
 	 * 
 	 * @param utilisateur
@@ -46,5 +46,12 @@ public interface AssociationPartieUtilisateurPersonnageDao extends GenericDao <A
 	 * @return les associations liées à cette partie et cet utilisateur en tant que MJ
 	 */
 	public List<AssociationPartieUtilisateurPersonnage> findByMjPartie(Utilisateur utilisateur, Partie partie);
-
+	/**
+	 * 
+	 * @param utilisateur
+	 * @param partie
+	 * @param personnage
+	 * @return Renvoie les associations existantes entre les 3 paramètres (utilisée pour assurer l'unicité des associations)
+	 */
+	public List<AssociationPartieUtilisateurPersonnage> findByPartieUtilisateurPersonnage(Utilisateur utilisateur, Partie partie, Personnage personnage);
 }
