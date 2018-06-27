@@ -19,7 +19,7 @@ public class Utilisateur {
 	
 	@Id
 	@JsonView(Views.Common.class)
-	@Column(length = 1024)
+	@Column(length = 512)
 	private String id;
 	
 	@OneToMany (mappedBy="utilisateur", fetch=FetchType.EAGER)
