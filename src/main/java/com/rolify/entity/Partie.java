@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,21 +40,38 @@ public class Partie {
 	@Column(length = 4000)
 	private String description;
 	
-	@ManyToMany (mappedBy="partiesJoueur")
+	@ManyToMany (mappedBy="partiesJoueur", fetch=FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<Utilisateur> joueurs;
 	
-	@OneToMany (mappedBy="partie")
+	@OneToMany (mappedBy="partie", fetch= FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<AssociationPartieUtilisateurPersonnage> associations;
 	
-	@OneToMany (mappedBy="partie")
+	@OneToMany (mappedBy="partie", fetch= FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<Personnage> personnages;
 	
-	@OneToMany (mappedBy="partie")
+	@OneToMany (mappedBy="partie", fetch= FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<MessagePartie> messages;
+
+
+	public Partie() {
+		super();
+		this.joueurs = new HashSet<Utilisateur>();
+		this.associations = new HashSet<AssociationPartieUtilisateurPersonnage>();
+		this.personnages = new HashSet<Personnage>();
+		this.messages = new HashSet<MessagePartie>();
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public int getId() {
 		return id;
@@ -119,10 +137,6 @@ public class Partie {
 		this.messages = messages;
 	}
 
-	public Partie() {
-		super();
-		this.joueurs = new HashSet<Utilisateur>();
-	}
 
 	public void addJoueur(Utilisateur joueur) {
 		this.joueurs.add(joueur);

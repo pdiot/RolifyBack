@@ -1,9 +1,11 @@
 package com.rolify.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,12 +54,18 @@ public class Personnage {
 	@Column(length = 4000)
 	private String background;
 
-	@OneToMany (mappedBy="personnage")
+	@OneToMany (mappedBy="personnage", fetch=FetchType.EAGER)
 	private Set<AssociationPartieUtilisateurPersonnage> associations;
+
 	
 	@ManyToOne
 	private Partie partie;
 
+	public Personnage() {
+		super();
+		this.associations = new HashSet<AssociationPartieUtilisateurPersonnage>();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -186,11 +194,6 @@ public class Personnage {
 		this.partie = partie;
 	}
 
-	public Personnage() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	 
 	public void ajouterPartiePersonnage(Partie partie) { //crée association entre un personnage et une partie
 	    this.partie = partie; 
 	    partie.addPersonnage(this); 

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,11 +23,11 @@ public class GroupeDiscussion {
 	@JsonView(Views.Common.class)
 	private int id;
 	
-	@ManyToMany (mappedBy="groupes")
+	@ManyToMany (mappedBy="groupes", fetch= FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<Utilisateur> utilisateurs;
 	
-	@OneToMany (mappedBy="groupe")
+	@OneToMany (mappedBy="groupe", fetch= FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<MessagePrive> messages;
 

@@ -34,7 +34,7 @@ public class Utilisateur {
 	@JsonView(Views.Common.class)
 	private Set<Partie> partiesJoueur;
 	
-	@OneToMany (mappedBy="source", fetch=FetchType.LAZY)
+	@OneToMany (mappedBy="source", fetch=FetchType.EAGER)
 	@JsonView(Views.Common.class)
 	private Set<Message> messages;
 	
@@ -42,6 +42,15 @@ public class Utilisateur {
 	@JsonView(Views.Common.class)
 	private Set<GroupeDiscussion> groupes;
 
+	public Utilisateur() {
+		super();
+		this.partiesJoueur = new HashSet<Partie>();
+		this.messages = new HashSet<Message>();
+		this.associations = new HashSet<AssociationPartieUtilisateurPersonnage>();
+		this.partiesMJ = new HashSet<Partie>();
+		this.groupes = new HashSet<GroupeDiscussion>();
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -90,10 +99,6 @@ public class Utilisateur {
 		this.groupes = groupes;
 	}
 
-	public Utilisateur() {
-		super();
-		this.partiesJoueur = new HashSet<Partie>();
-	}
 	
 	public void ajouterPartieJoueur(Partie partie) { //crée association entre un joueur et une partie
 	    this.partiesJoueur.add(partie); 

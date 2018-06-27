@@ -14,7 +14,7 @@
 	<mvc:annotation-driven />
 
 	<!-- Scanne le package qui contient les controlleurs Spring -->
-	<context:component-scan base-package="com.monapp.controller, com.monapp.dao" />
+	<context:component-scan base-package="com.rolify.controller, com.rolify.dao" />
 
 	<!-- Création d'une dataSource DBCP (Connection Pooling) -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">

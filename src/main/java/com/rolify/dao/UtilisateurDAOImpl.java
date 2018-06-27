@@ -28,15 +28,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public List<Utilisateur> findAll() {
-		System.out.println("Dans findall");
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Utilisateur> crit = cb.createQuery(Utilisateur.class);
 		Root<Utilisateur> r = crit.from(Utilisateur.class);
 
-		System.out.println("Avant select");
 		crit.select(r);
-
-		System.out.println("Apr�s select");
 		
 		return em.createQuery(crit).getResultList();
 	}

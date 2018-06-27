@@ -83,7 +83,7 @@ public class TestUtilisateurDAO {
 		} else {
 			System.out.println("KO");
 		}
-		util.joinPartieJoueur(partie);
+		util.ajouterPartieJoueur(partie);
 		daoUtil.update(util);
 		if (daoPartie.findByJoueur(util.getId()).size() == 1) {
 			System.out.println("Test join Partie joueur 2 OK");
