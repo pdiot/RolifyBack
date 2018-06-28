@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -53,14 +54,15 @@ public class GroupeDiscussionDAOImpl implements GroupeDiscussionDAO {
 
 	@Override
 	public GroupeDiscussion findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(GroupeDiscussion.class, id);
 	}
 
 	@Override
 	public List<GroupeDiscussion> findByUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select g from GroupeDiscussion g  where g.utilisateur = ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, utilisateur); //set Parameter here
+		return query.getResultList();
 	}
 
 }

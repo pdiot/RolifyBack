@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -12,7 +13,9 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.rolify.chat.GroupeDiscussion;
+import com.rolify.chat.MessagePartie;
 import com.rolify.chat.MessagePrive;
+import com.rolify.entity.Utilisateur;
 
 @Transactional
 @Repository
@@ -53,20 +56,24 @@ public class MessagePriveDAOImpl implements MessagePriveDAO {
 
 	@Override
 	public MessagePrive findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(MessagePrive.class, id);
 	}
 
 	@Override
 	public List<MessagePrive> findByGroupe(GroupeDiscussion groupe) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select m from MessagePrive m where m.groupe = ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, groupe); //set Parameter here
+		return query.getResultList();
 	}
 
 	@Override
 	public List<MessagePrive> findSinceIdForGroupe(Integer dernierId, GroupeDiscussion groupe) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select m from MessagePrive m where m.id > ?1 and m.groupe=?2";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, dernierId); 
+		query.setParameter(2, groupe); 
+		return query.getResultList();
 	}
 
 

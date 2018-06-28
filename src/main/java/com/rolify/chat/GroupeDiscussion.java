@@ -70,7 +70,6 @@ public class GroupeDiscussion {
 
 	public GroupeDiscussion() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void addUtilisateur(Utilisateur utilisateur) {

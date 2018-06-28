@@ -29,7 +29,6 @@ public class MessagePrive extends Message {
 
 	public MessagePrive() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

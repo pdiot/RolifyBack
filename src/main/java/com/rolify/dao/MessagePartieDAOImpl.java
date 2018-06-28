@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -46,7 +47,7 @@ public class MessagePartieDAOImpl implements MessagePartieDAO {
 	}
 	
 	@Override
-	public MessagePartie findByPrimaryKey(String id) {
+	public MessagePartie findByPrimaryKey(Integer id) {
 		return em.find(MessagePartie.class, id);
 	}
 
@@ -57,14 +58,19 @@ public class MessagePartieDAOImpl implements MessagePartieDAO {
 
 	@Override
 	public List<MessagePartie> findByPartie(Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select m from MessagePartie m  where m.partie= ?1";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, partie); //set Parameter here
+		return query.getResultList();
 	}
 
 	@Override
 	public List<MessagePartie> findSinceIdForGroupe(Integer dernierId, Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select m from MessagePartie m where m.id> ?1 and m.partie= ?2";
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, dernierId); 
+		query.setParameter(2, partie); 
+		return query.getResultList();
 	}
 
 }

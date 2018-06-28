@@ -9,9 +9,8 @@ import com.rolify.entity.Personnage;
 import com.rolify.entity.Utilisateur;
 
 public interface UtilisateurDAO extends GenericDao<Utilisateur, String> {
-	public Utilisateur findMjByPartie(Partie partie);
+	public List<Utilisateur> findMjByPartie(Partie partie);
 	public List<Utilisateur> findJoueursByPartie(Partie partie);
 	public List<Utilisateur> findUtilisateurByDiscussion(GroupeDiscussion groupe);
-	public Utilisateur findUtilisateurByPersonnage(Personnage personnage);
-	public Utilisateur findUtilisateurByMessage(Message message);
+	public List<Utilisateur> findUtilisateurByMessage(Message message);
 }

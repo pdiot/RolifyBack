@@ -61,7 +61,6 @@ public class AssociationPartieUtilisateurPersonnage {
 	}
 	public AssociationPartieUtilisateurPersonnage() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
