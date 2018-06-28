@@ -7,10 +7,10 @@ GetOne				OK
 Put					OK			// Contraintes métier à rajouter
 Post				OK			// 
 Delete				OK
-joinGroupe
-leaveGroupe
-joinPartieJoueur
-leavePartieJoueur
+joinGroupe			OK
+leaveGroupe			TODO
+joinPartieJoueur	TODO
+leavePartieJoueur	TODO
 
 Personnages
 
@@ -27,7 +27,7 @@ GetOne				OK
 Put					OK
 Post				OK
 Delete				OK
-setMj
+setMj				TODO
 
 Associations
 
@@ -50,20 +50,27 @@ Post				OK, vérifications : pas de body vide
 										pas de source null
 Delete				OK
 
+GroupeDiscussion
+
+GetAll				OK
+GetOne				OK
+Put					OK
+Post				OK
+Delete				OK
+
 MessagePrive
 
-
-GetAll				
-GetOne				
-Put					
-Post				
-Delete				
+GetAll				OK
+GetOne				OK
+Put					OK
+Post				OK, vérifications : pas de body vide
+										pas de source null
+Delete				OK
 
 MessagePartie
 
-
-GetAll				
-GetOne				
-Put					
-Post				
-Delete				
+GetAll				OK
+GetOne				OK
+Put					OK
+Post				OK
+Delete				OK
