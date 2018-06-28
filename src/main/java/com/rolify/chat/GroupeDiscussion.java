@@ -72,12 +72,6 @@ public class GroupeDiscussion {
 	public void setMessages(Set<MessagePrive> messages) {
 		this.messages = messages;
 	}
-
-
-
-	public GroupeDiscussion() {
-		super();
-	}
 	
 	public void addUtilisateur(Utilisateur utilisateur) {
 		this.utilisateurs.add(utilisateur);
