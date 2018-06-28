@@ -61,21 +61,20 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur findMjByPartie(Partie partie) {
+	public List<Utilisateur> findMjByPartie(Partie partie) {
 		
-		String querystring = "select u from Utilisateur u where u == ?1";
+		String querystring = "select u from Utilisateur u join u.partiesMJ p where p = ?1";
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, partie.getMj());
-		
-		return (Utilisateur) query.getSingleResult();
+		query.setParameter(1, partie);	
+		return query.getResultList();
 	}
 
 	@Override
 	public List<Utilisateur> findJoueursByPartie(Partie partie) {
 		
-		String querystring = "select p.joueurs from Partie p where p.id == ?1";
+		String querystring = "select u from Utilisateur u join u.partiesJoueur p where p = ?1";
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, partie.getId());
+		query.setParameter(1, partie);
 		
 		return (List<Utilisateur>) query.getResultList();
 		
@@ -85,29 +84,21 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	@Override
 	public List<Utilisateur> findUtilisateurByDiscussion(GroupeDiscussion groupe) {
 		
-		String querystring = "select d.utilisateur from Utilisateur d where d.id == ?1";
+		String querystring = "select u from Utilisateur u join u.groupes p where p = ?1";
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, groupe.getId());
+		query.setParameter(1, groupe);
 		
 		return (List<Utilisateur>) query.getResultList();
 		
 	}
 
 	@Override
-	public Utilisateur findUtilisateurByPersonnage(Personnage personnage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Utilisateur findUtilisateurByMessage(Message message) {
+	public List<Utilisateur> findUtilisateurByMessage(Message message) {
 		
-		String querystring = "select m.utilisateur from Utilisateur m where m.id == ?1";  //?1 = Parameter
+		String querystring = "select utilisateur from Utilisateur u where u.message = ?1";  //?1 = Parameter
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, message.getId()); //set Parameter here
-		
-		return (Utilisateur) query.getSingleResult();
-		
+		query.setParameter(1, message); //set Parameter here
+		return query.getResultList();
 	}
 	
 

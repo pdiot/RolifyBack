@@ -74,6 +74,10 @@ public class GroupeDiscussion {
 	}
 
 
+
+	public GroupeDiscussion() {
+		super();
+	}
 	
 	public void addUtilisateur(Utilisateur utilisateur) {
 		this.utilisateurs.add(utilisateur);

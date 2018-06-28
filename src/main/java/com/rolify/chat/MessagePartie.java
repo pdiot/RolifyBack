@@ -26,7 +26,6 @@ public class MessagePartie extends Message {
 
 	public MessagePartie() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

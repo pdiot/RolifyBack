@@ -64,20 +64,25 @@ public class AssociationPartieUtilisateurPersonnageDAOImpl implements Associatio
 		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.personnage = ?1";
 		Query query = em.createQuery( querystring ) ;
 		query.setParameter(1, personnage); //set Parameter here
-		
 		return query.getResultList();
 	}
 
 	@Override
 	public List<AssociationPartieUtilisateurPersonnage> findByPartie(Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.partie= ?1 and a.role= ?2" ;
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, partie); 
+		query.setParameter(2, Role.MJ); 
+		return query.getResultList();
 	}
 
 	@Override
 	public List<AssociationPartieUtilisateurPersonnage> findByJoueur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.utilisateur= ?1 and a.role= ?2" ;
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, utilisateur); 
+		query.setParameter(2, Role.JOUEUR); 
+		return query.getResultList();
 	}
 
 	@Override
@@ -94,14 +99,21 @@ public class AssociationPartieUtilisateurPersonnageDAOImpl implements Associatio
 
 	@Override
 	public List<AssociationPartieUtilisateurPersonnage> findByMj(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.utilisateur= ?1 and a.role= ?2" ;
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, utilisateur); //set Parameter here
+		query.setParameter(2, Role.MJ); //set Parameter here
+		return query.getResultList();
 	}
 
 	@Override
 	public List<AssociationPartieUtilisateurPersonnage> findByMjPartie(Utilisateur utilisateur, Partie partie) {
-		// TODO Auto-generated method stub
-		return null;
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.utilisateur= ?1 and a.role= ?2 and a.partie= ?3" ;
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, utilisateur); 
+		query.setParameter(2, Role.MJ); 
+		query.setParameter(3, partie);
+		return query.getResultList();
 	}
 
 	@Override
