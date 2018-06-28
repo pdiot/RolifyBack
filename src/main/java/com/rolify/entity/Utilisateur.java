@@ -28,7 +28,7 @@ public class Utilisateur {
 	private String pseudo;
 	
 	@JsonView(Views.Common.class)
-	@Column(length = 50)
+	@Column(length = 512)
 	private String urlAvatar;
 	
 	@OneToMany (mappedBy="utilisateur", fetch=FetchType.EAGER)
@@ -39,7 +39,7 @@ public class Utilisateur {
 	@JsonView(Views.UtilisateurWithPartiesMJ.class)
 	private Set<Partie> partiesMJ;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JsonView(Views.UtilisateurWithPartiesJoueur.class)
 	private Set<Partie> partiesJoueur;
 	
@@ -47,7 +47,7 @@ public class Utilisateur {
 	@JsonView(Views.UtilisateurWithMessages.class)
 	private Set<Message> messages;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JsonView(Views.UtilisateurWithGroupes.class)
 	private Set<GroupeDiscussion> groupes;
 
