@@ -131,8 +131,9 @@ public class Partie {
 		this.joueurs.add(joueur);
 	}
 	
-	public void addMJ(Utilisateur mj) {
-		this.mj=mj; //car on ne fait que du add pour des listes
+	public void changeMJ(Utilisateur mj) {
+		this.mj=mj;
+		mj.ajouterPartieMJ(this);
 	}
 	
 }

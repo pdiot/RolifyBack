@@ -30,5 +30,8 @@ public interface Views {
 	
 	public static interface Message extends Common {}
 	public static interface MessageWithSource extends Message {}
+	public static interface MessageWithPartie extends Message {}
+	public static interface MessageWithGroupe extends Message {}
+	public static interface MessageWithAll extends MessageWithSource, MessageWithPartie, MessageWithGroupe {}
 	
 }

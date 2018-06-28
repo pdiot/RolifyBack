@@ -12,7 +12,7 @@ import com.rolify.entity.Views;
 @PrimaryKeyJoinColumn(name="Message_id")
 public class MessagePartie extends Message {
 
-	@JsonView(Views.Common.class)
+	@JsonView(Views.MessageWithPartie.class)
 	@ManyToOne
 	private Partie partie;
 

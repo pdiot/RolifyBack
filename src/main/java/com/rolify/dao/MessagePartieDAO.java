@@ -5,7 +5,7 @@ import java.util.List;
 import com.rolify.chat.MessagePartie;
 import com.rolify.entity.Partie;
 
-public interface MessagePartieDAO extends GenericDao<MessagePartie, String> {
+public interface MessagePartieDAO extends GenericDao<MessagePartie, Integer> {
 
 	/**
 	 * 

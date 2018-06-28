@@ -46,7 +46,7 @@ public class MessagePartieDAOImpl implements MessagePartieDAO {
 	}
 	
 	@Override
-	public MessagePartie findByPrimaryKey(String id) {
+	public MessagePartie findByPrimaryKey(Integer id) {
 		return em.find(MessagePartie.class, id);
 	}
 

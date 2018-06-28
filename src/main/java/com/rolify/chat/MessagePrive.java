@@ -16,7 +16,7 @@ import com.rolify.entity.Views;
 public class MessagePrive extends Message {
 
 	@ManyToOne
-	@JsonView(Views.Common.class)
+	@JsonView(Views.MessageWithGroupe.class)
 	private GroupeDiscussion groupe;
 
 	public GroupeDiscussion getGroupe() {

@@ -116,7 +116,6 @@ public class Utilisateur {
 	
 	public void ajouterPartieMJ(Partie partie) {
 		this.partiesMJ.add(partie);
-		partie.addMJ(this);
 	}
 	
 	public void joinDiscussion(GroupeDiscussion groupe) {

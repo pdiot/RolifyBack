@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.dao.PartieDao;
 import com.rolify.entity.Partie;
+import com.rolify.entity.Utilisateur;
 import com.rolify.entity.Views;
 
 @CrossOrigin
@@ -82,6 +83,13 @@ public class PartieController {
 			ch = partieDao.update(user);
 		}		
 		return new ResponseEntity<Partie>(ch, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<Partie> setMJ() {
+		
+		// TODO
+		
+		return null;
 	}
 
 }

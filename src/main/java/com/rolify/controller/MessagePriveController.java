@@ -15,75 +15,75 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.rolify.dao.MessageGlobalDAO;
-import com.rolify.chat.MessageGlobal;
+import com.rolify.dao.MessagePriveDAO;
+import com.rolify.chat.MessagePrive;
 import com.rolify.entity.Views;
 
 @CrossOrigin
 @RestController
-public class MessageGlobalController {
+public class MessagePriveController {
 
 	@Autowired
-	MessageGlobalDAO messDao;
+	MessagePriveDAO messDao;
 
 	@JsonView(Views.MessageWithAll.class)
-	@GetMapping("/api/messagesglobal")
-	public ResponseEntity<List<MessageGlobal>> findAll() {
-		List<MessageGlobal> woners = messDao.findAll();
-		return new ResponseEntity<List<MessageGlobal>>(woners, HttpStatus.OK);
+	@GetMapping("/api/messagesPrives")
+	public ResponseEntity<List<MessagePrive>> findAll() {
+		List<MessagePrive> woners = messDao.findAll();
+		return new ResponseEntity<List<MessagePrive>>(woners, HttpStatus.OK);
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@GetMapping("/api/messagesglobal/{id}")
-	public ResponseEntity<MessageGlobal> findOne(@PathVariable("id") Integer id) {
-		MessageGlobal ownr = messDao.findByPrimaryKey(id);
+	@GetMapping("/api/messagesPrives/{id}")
+	public ResponseEntity<MessagePrive> findOne(@PathVariable("id") Integer id) {
+		MessagePrive ownr = messDao.findByPrimaryKey(id);
 		
 		if (ownr == null) {
 			return new ResponseEntity<>(ownr, HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<MessageGlobal>(ownr, HttpStatus.OK);
+		return new ResponseEntity<MessagePrive>(ownr, HttpStatus.OK);
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@DeleteMapping("/api/messagesglobal/{id}")
-	public ResponseEntity<MessageGlobal> delete(@PathVariable("id") Integer id) {
-		MessageGlobal ownr = messDao.findByPrimaryKey(id);
+	@DeleteMapping("/api/messagesPrives/{id}")
+	public ResponseEntity<MessagePrive> delete(@PathVariable("id") Integer id) {
+		MessagePrive ownr = messDao.findByPrimaryKey(id);
 		
 		if (ownr == null) {
 			return new ResponseEntity<>(ownr, HttpStatus.NOT_FOUND);
 		}
 		messDao.delete(ownr);
-		return new ResponseEntity<MessageGlobal>(ownr, HttpStatus.OK);
+		return new ResponseEntity<MessagePrive>(ownr, HttpStatus.OK);
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@PostMapping("/api/messagesglobal")
-	public ResponseEntity<MessageGlobal> create(@RequestBody MessageGlobal user) {
+	@PostMapping("/api/messagesPrives")
+	public ResponseEntity<MessagePrive> create(@RequestBody MessagePrive user) {
 		
 		if (user.getId() > 0) {
-			return new ResponseEntity<MessageGlobal>(user, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<MessagePrive>(user, HttpStatus.BAD_REQUEST);
 		}
 		
 		if (user.getSource() == null || user.getBody().equals("") ) {
-			return new ResponseEntity<MessageGlobal>(user, HttpStatus.PRECONDITION_REQUIRED);
+			return new ResponseEntity<MessagePrive>(user, HttpStatus.PRECONDITION_REQUIRED);
 		}
 		messDao.save(user);
 		
-		return new ResponseEntity<MessageGlobal>(user, HttpStatus.OK);
+		return new ResponseEntity<MessagePrive>(user, HttpStatus.OK);
 		
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@PutMapping("/api/messagesglobal")
-	public ResponseEntity<MessageGlobal> update(@RequestBody MessageGlobal user) {
-		MessageGlobal ch = messDao.findByPrimaryKey(user.getId());		
+	@PutMapping("/api/messagesPrives")
+	public ResponseEntity<MessagePrive> update(@RequestBody MessagePrive user) {
+		MessagePrive ch = messDao.findByPrimaryKey(user.getId());		
 		if (ch == null) {
 			ch = messDao.save(user);
 		} else {
 			ch = messDao.update(user);
 		}
-		return new ResponseEntity<MessageGlobal>(ch, HttpStatus.OK);
+		return new ResponseEntity<MessagePrive>(ch, HttpStatus.OK);
 	}
 
 }

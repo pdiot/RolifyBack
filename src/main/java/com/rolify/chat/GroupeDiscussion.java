@@ -1,5 +1,6 @@
 package com.rolify.chat;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Generated;
@@ -31,6 +32,12 @@ public class GroupeDiscussion {
 	@JsonView(Views.Common.class)
 	private Set<MessagePrive> messages;
 
+
+	public GroupeDiscussion() {
+		super();
+		this.utilisateurs = new HashSet<Utilisateur>();
+		this.messages = new HashSet<MessagePrive>();
+	}
 	
 	public int getId() {
 		return id;
@@ -67,11 +74,6 @@ public class GroupeDiscussion {
 	}
 
 
-
-	public GroupeDiscussion() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	
 	public void addUtilisateur(Utilisateur utilisateur) {
 		this.utilisateurs.add(utilisateur);

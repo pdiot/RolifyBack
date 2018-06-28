@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.rolify.chat.GroupeDiscussion;
+import com.rolify.dao.GroupeDiscussionDAO;
 import com.rolify.dao.UtilisateurDAO;
 import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
 import com.rolify.entity.Utilisateur;
@@ -26,6 +28,7 @@ public class UtilisateurController {
 
 	@Autowired
 	UtilisateurDAO utilDao;
+	GroupeDiscussionDAO groupeDao;
 
 	@JsonView(Views.UtilisateurWithAll.class)
 	@GetMapping("/api/utilisateurs")
@@ -83,4 +86,41 @@ public class UtilisateurController {
 		return new ResponseEntity<Utilisateur>(ch, HttpStatus.OK);
 	}
 
+	@JsonView(Views.UtilisateurWithAll.class)
+	@PutMapping("/api/utilisateurs/{id}/discussions/join/{idgroupe}")
+	public ResponseEntity<Utilisateur> joinGroupeDiscussion(@PathVariable("id") String idUtil, @PathVariable("idgroupe") int idGroupe) {
+		Utilisateur util = utilDao.findByPrimaryKey(idUtil);
+		GroupeDiscussion groupe = groupeDao.findByPrimaryKey(idGroupe);
+		if (util == null || groupe == null) {
+			return new ResponseEntity<Utilisateur>(util, HttpStatus.PRECONDITION_FAILED);
+		}
+		groupe.addUtilisateur(util);
+		groupeDao.update(groupe);
+		util = utilDao.findByPrimaryKey(idUtil);
+		return new ResponseEntity<Utilisateur>(util, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<Utilisateur> leaveGroupeDiscussion() {
+		
+		// TODO
+		
+		return null;
+	}
+	
+	public ResponseEntity<Utilisateur> joinPartieJoueur() {
+		
+		// TODO
+		
+		return null;
+	}
+	
+	public ResponseEntity<Utilisateur> leavePartieJoueur() {
+		
+		// TODO
+		
+		return null;
+	}
+
+	
+	
 }

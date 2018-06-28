@@ -2,11 +2,15 @@ Tests Api Rest
 
 Utilisateurs
 
-GetAll				Erreur lazy du cul
-GetOne				Erreur lazy du cul
-Put					OK
-Post				OK
-Delete				Erreur lazy sur le retour, mais le delete marche
+GetAll				OK
+GetOne				OK
+Put					OK			// Contraintes métier à rajouter
+Post				OK			// 
+Delete				OK
+joinGroupe
+leaveGroupe
+joinPartieJoueur
+leavePartieJoueur
 
 Personnages
 
@@ -23,14 +27,14 @@ GetOne				OK
 Put					OK
 Post				OK
 Delete				OK
-
+setMj
 
 Associations
 
 GetAll				OK
 GetOne				OK
 Put					Pas de put autorisé, on supprimera puis recréera les associations
-Post				OK, vérifications effectuées : personnage déjà associé, 
+Post				OK, vérifications effectuées : 	personnage déjà associé, 
 													utilisateur déjà associé à un personnage dans cette partie, 
 													association déjà existante (utile pour le MJ),
 													utilisateur non présent dans la partie (MJ ou joueur)
@@ -45,3 +49,21 @@ Put					OK
 Post				OK, vérifications : pas de body vide
 										pas de source null
 Delete				OK
+
+MessagePrive
+
+
+GetAll				
+GetOne				
+Put					
+Post				
+Delete				
+
+MessagePartie
+
+
+GetAll				
+GetOne				
+Put					
+Post				
+Delete				
