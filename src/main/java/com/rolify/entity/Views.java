@@ -10,7 +10,6 @@ public interface Views {
 	public static interface PartieWithMessages extends Partie{}
 	public static interface PartieWithAll extends PartieWithJoueurs, PartieWithMJ, PartieWithAssociations, PartieWithMessages {}
 	
-
 	public static interface Utilisateur extends Common {}
 	public static interface UtilisateurWithAssociations extends Utilisateur {}
 	public static interface UtilisateurWithPartiesMJ extends Utilisateur {}
@@ -27,6 +26,11 @@ public interface Views {
 	
 	public static interface Personnage extends Common {}
 	public static interface PersonnageWithAssociation extends Personnage {}
+	
+	public static interface GroupeDiscussion extends Common {}
+	public static interface GroupeDiscussionWithUsers extends Common {}
+	public static interface GroupeDiscussionWithMessages extends Common {}
+	public static interface GroupeDiscussionWithAll extends GroupeDiscussionWithUsers, GroupeDiscussionWithMessages {}
 	
 	public static interface Message extends Common {}
 	public static interface MessageWithSource extends Message {}

@@ -26,7 +26,7 @@ public class GroupeDiscussionController {
 	@Autowired
 	GroupeDiscussionDAO groupeDao;
 	
-	@JsonView(Views.PartieWithAll.class)
+	@JsonView(Views.GroupeDiscussionWithAll.class)
 	@GetMapping("/api/discussions")
 	public ResponseEntity<List<GroupeDiscussion>> findAll() {
 		List<GroupeDiscussion> woners = groupeDao.findAll();
@@ -35,7 +35,7 @@ public class GroupeDiscussionController {
 	}
 	
 	@GetMapping("/api/discussions/{id}")
-	@JsonView(Views.PartieWithAll.class)
+	@JsonView(Views.GroupeDiscussionWithAll.class)
 	public ResponseEntity<GroupeDiscussion> findOne(@PathVariable("id") Integer id) {
 		GroupeDiscussion ownr = groupeDao.findByPrimaryKey(id);
 		
@@ -47,7 +47,7 @@ public class GroupeDiscussionController {
 	}
 	
 	@DeleteMapping("/api/discussions/{id}")
-	@JsonView(Views.PartieWithAll.class)
+	@JsonView(Views.GroupeDiscussionWithAll.class)
 	public ResponseEntity<GroupeDiscussion> delete(@PathVariable("id") Integer id) {
 		GroupeDiscussion ownr = groupeDao.findByPrimaryKey(id);
 		
@@ -59,7 +59,7 @@ public class GroupeDiscussionController {
 	}
 	
 	@PostMapping("/api/discussions")
-	@JsonView(Views.PartieWithAll.class)
+	@JsonView(Views.GroupeDiscussionWithAll.class)
 	public ResponseEntity<GroupeDiscussion> create(@RequestBody GroupeDiscussion user) {
 		
 		if (user.getId() > 0) {
@@ -73,7 +73,7 @@ public class GroupeDiscussionController {
 	}
 	
 	@PutMapping("/api/discussions")
-	@JsonView(Views.PartieWithAll.class)
+	@JsonView(Views.GroupeDiscussionWithAll.class)
 	public ResponseEntity<GroupeDiscussion> update(@RequestBody GroupeDiscussion user) {
 		GroupeDiscussion ch = groupeDao.findByPrimaryKey(user.getId());		
 		if (ch == null) {

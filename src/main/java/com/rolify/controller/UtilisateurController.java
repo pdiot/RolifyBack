@@ -28,6 +28,7 @@ public class UtilisateurController {
 
 	@Autowired
 	UtilisateurDAO utilDao;
+	@Autowired
 	GroupeDiscussionDAO groupeDao;
 
 	@JsonView(Views.UtilisateurWithAll.class)
@@ -40,6 +41,18 @@ public class UtilisateurController {
 	@JsonView(Views.UtilisateurWithAll.class)
 	@GetMapping("/api/utilisateurs/{id}")
 	public ResponseEntity<Utilisateur> findOne(@PathVariable("id") String id) {
+		Utilisateur ownr = utilDao.findByPrimaryKey(id);
+		
+		if (ownr == null) {
+			return new ResponseEntity<>(ownr, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Utilisateur>(ownr, HttpStatus.OK);
+	}
+	
+	@JsonView(Views.Utilisateur.class)
+	@GetMapping("/api/utilisateurs/common/{id}")
+	public ResponseEntity<Utilisateur> findOneCommon(@PathVariable("id") String id) {
 		Utilisateur ownr = utilDao.findByPrimaryKey(id);
 		
 		if (ownr == null) {
@@ -94,8 +107,9 @@ public class UtilisateurController {
 		if (util == null || groupe == null) {
 			return new ResponseEntity<Utilisateur>(util, HttpStatus.PRECONDITION_FAILED);
 		}
-		groupe.addUtilisateur(util);
+		util.joinDiscussion(groupe);
 		groupeDao.update(groupe);
+		utilDao.update(util);
 		util = utilDao.findByPrimaryKey(idUtil);
 		return new ResponseEntity<Utilisateur>(util, HttpStatus.OK);
 	}

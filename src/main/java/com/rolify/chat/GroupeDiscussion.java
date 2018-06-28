@@ -25,11 +25,11 @@ public class GroupeDiscussion {
 	private int id;
 	
 	@ManyToMany (mappedBy="groupes", fetch= FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.GroupeDiscussionWithUsers.class)
 	private Set<Utilisateur> utilisateurs;
 	
 	@OneToMany (mappedBy="groupe", fetch= FetchType.EAGER)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.GroupeDiscussionWithMessages.class)
 	private Set<MessagePrive> messages;
 
 

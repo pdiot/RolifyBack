@@ -27,14 +27,14 @@ public class MessagePriveController {
 	MessagePriveDAO messDao;
 
 	@JsonView(Views.MessageWithAll.class)
-	@GetMapping("/api/messagesPrives")
+	@GetMapping("/api/messagesprives")
 	public ResponseEntity<List<MessagePrive>> findAll() {
 		List<MessagePrive> woners = messDao.findAll();
 		return new ResponseEntity<List<MessagePrive>>(woners, HttpStatus.OK);
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@GetMapping("/api/messagesPrives/{id}")
+	@GetMapping("/api/messagesprives/{id}")
 	public ResponseEntity<MessagePrive> findOne(@PathVariable("id") Integer id) {
 		MessagePrive ownr = messDao.findByPrimaryKey(id);
 		
@@ -46,7 +46,7 @@ public class MessagePriveController {
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@DeleteMapping("/api/messagesPrives/{id}")
+	@DeleteMapping("/api/messagesprives/{id}")
 	public ResponseEntity<MessagePrive> delete(@PathVariable("id") Integer id) {
 		MessagePrive ownr = messDao.findByPrimaryKey(id);
 		
@@ -58,7 +58,7 @@ public class MessagePriveController {
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@PostMapping("/api/messagesPrives")
+	@PostMapping("/api/messagesprives")
 	public ResponseEntity<MessagePrive> create(@RequestBody MessagePrive user) {
 		
 		if (user.getId() > 0) {
@@ -75,7 +75,7 @@ public class MessagePriveController {
 	}
 
 	@JsonView(Views.MessageWithAll.class)
-	@PutMapping("/api/messagesPrives")
+	@PutMapping("/api/messagesprives")
 	public ResponseEntity<MessagePrive> update(@RequestBody MessagePrive user) {
 		MessagePrive ch = messDao.findByPrimaryKey(user.getId());		
 		if (ch == null) {
