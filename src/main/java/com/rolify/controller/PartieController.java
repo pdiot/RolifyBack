@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.dao.PartieDao;
+import com.rolify.dao.UtilisateurDAO;
 import com.rolify.entity.Partie;
 import com.rolify.entity.Utilisateur;
 import com.rolify.entity.Views;
@@ -26,6 +27,9 @@ public class PartieController {
 
 	@Autowired
 	PartieDao partieDao;
+
+	@Autowired
+	UtilisateurDAO utilDao;
 	
 	@JsonView(Views.PartieWithAll.class)
 	@GetMapping("/api/parties")
@@ -85,11 +89,26 @@ public class PartieController {
 		return new ResponseEntity<Partie>(ch, HttpStatus.OK);
 	}
 	
-	public ResponseEntity<Partie> setMJ() {
+	@PutMapping("/api/parties/{id_partie}/setMj/{id_mj}")
+	@JsonView(Views.PartieWithAll.class)
+	public ResponseEntity<Partie> setMJ(@PathVariable("id_partie") int idPartie, @PathVariable("id_mj") String idMj) {
+		Utilisateur mj = utilDao.findByPrimaryKey(idMj);
+		Partie partie = partieDao.findByPrimaryKey(idPartie);
+		if (mj == null || partie == null) {
+			return new ResponseEntity<Partie>(partie, HttpStatus.PRECONDITION_FAILED);
+		}
+		// TODO : vérifier que mj n'est pas un joueur
+		partie.changeMJ(mj);
+		partieDao.update(partie);
+		removeAssociationsMJ(mj, partie);
+		partie = partieDao.findByPrimaryKey(idPartie);
 		
-		// TODO
 		
-		return null;
+		return new ResponseEntity<Partie>(partie, HttpStatus.OK);
+	}
+	
+	private void removeAssociationsMJ(Utilisateur mj, Partie partie) {
+		// TODO voir UtilisateurController.removeAssociationsJoueur
 	}
 
 }

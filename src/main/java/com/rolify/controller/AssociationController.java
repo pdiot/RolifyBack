@@ -83,13 +83,13 @@ public class AssociationController {
 		AssociationPartieUtilisateurPersonnage association = reInstanciate(asso);
 		
 		if (checkUtilInPartie(association)) {
-			return new ResponseEntity<AssociationPartieUtilisateurPersonnage>(association, HttpStatus.PRECONDITION_FAILED);
+			return new ResponseEntity<AssociationPartieUtilisateurPersonnage>(association, HttpStatus.PRECONDITION_REQUIRED);
 		}
 		if (checkConflitRole(association)) {
 			return new ResponseEntity<AssociationPartieUtilisateurPersonnage>(association, HttpStatus.PRECONDITION_FAILED);
 		}
 		if (checkPresent(association)) {
-			return new ResponseEntity<AssociationPartieUtilisateurPersonnage>(association, HttpStatus.PRECONDITION_FAILED);
+			return new ResponseEntity<AssociationPartieUtilisateurPersonnage>(association, HttpStatus.I_AM_A_TEAPOT);
 		}
 		
 		assoDAO.save(association);
@@ -173,19 +173,22 @@ public class AssociationController {
 	private boolean checkUtilInPartie(AssociationPartieUtilisateurPersonnage asso) {
 		Utilisateur utilisateur = utilDao.findByPrimaryKey(asso.getUtilisateur().getId());
 		Partie partie = partieDao.findByPrimaryKey(asso.getPartie().getId());
-		
+		boolean ret = true;
 		if (asso.getRole() == Role.JOUEUR) {
-			if (!partie.getJoueurs().contains(utilisateur)) {
-				return true;
+			for (Utilisateur joueur : partie.getJoueurs()) {
+				if (joueur.getId().equals(utilisateur.getId())) {
+					ret = false;
+				}
 			}
+			return ret;
+			
 		}
 		else {
-			if (partie.getMj() != utilisateur) {
-				return true;
+			if (partie.getMj().getId().equals(utilisateur.getId())) {
+				ret = false;
 			}
+			return ret;
 		}
-		
-		return false;
 		
 	}
 

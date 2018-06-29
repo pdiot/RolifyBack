@@ -9,8 +9,8 @@ Post				OK			//
 Delete				OK
 joinGroupe			OK
 leaveGroupe			TODO
-joinPartieJoueur	TODO
-leavePartieJoueur	TODO
+joinPartieJoueur	OK			// Contraintes métier à rajouter
+leavePartieJoueur	OK			
 
 Personnages
 
@@ -27,7 +27,7 @@ GetOne				OK
 Put					OK
 Post				OK
 Delete				OK
-setMj				TODO
+setMj				OK			// Contraintes métier à rajouter
 
 Associations
 

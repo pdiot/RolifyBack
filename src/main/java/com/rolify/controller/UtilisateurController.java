@@ -1,5 +1,6 @@
 package com.rolify.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.chat.GroupeDiscussion;
+import com.rolify.dao.AssociationPartieUtilisateurPersonnageDAO;
 import com.rolify.dao.GroupeDiscussionDAO;
+import com.rolify.dao.PartieDao;
 import com.rolify.dao.UtilisateurDAO;
 import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
+import com.rolify.entity.Partie;
 import com.rolify.entity.Utilisateur;
 import com.rolify.entity.Views;
 
@@ -30,6 +34,10 @@ public class UtilisateurController {
 	UtilisateurDAO utilDao;
 	@Autowired
 	GroupeDiscussionDAO groupeDao;
+	@Autowired
+	PartieDao partieDao;
+	@Autowired
+	AssociationPartieUtilisateurPersonnageDAO assoDao;
 
 	@JsonView(Views.UtilisateurWithAll.class)
 	@GetMapping("/api/utilisateurs")
@@ -121,19 +129,76 @@ public class UtilisateurController {
 		return null;
 	}
 	
-	public ResponseEntity<Utilisateur> joinPartieJoueur() {
+	@JsonView(Views.UtilisateurWithAll.class)
+	@PutMapping("/api/utilisateurs/{id}/parties/join/{idpartie}")
+	public ResponseEntity<Utilisateur> joinPartieJoueur(@PathVariable("id") String idUtil, @PathVariable("idpartie") int idPartie) {
+		Utilisateur joueur = utilDao.findByPrimaryKey(idUtil);
+		Partie partie = partieDao.findByPrimaryKey(idPartie);
+		if (joueur == null || partie == null) {
+			return new ResponseEntity<Utilisateur>(joueur, HttpStatus.PRECONDITION_FAILED);
+		}
 		
-		// TODO
+		// TODO : métier pour vérifier que le joueur n'est pas déjà dans la partie en tant que joueur ou MJ
+		//			et que le nombre maximal de joueurs n'est pas atteint
 		
-		return null;
+		joueur.joinPartieJoueur(partie);
+		utilDao.update(joueur);
+		joueur = utilDao.findByPrimaryKey(idUtil);
+		return new ResponseEntity<Utilisateur>(joueur, HttpStatus.OK);
+		
 	}
 	
-	public ResponseEntity<Utilisateur> leavePartieJoueur() {
+	@JsonView(Views.UtilisateurWithAll.class)
+	@PutMapping("/api/utilisateurs/{idutil}/parties/leave/{idpartie}")
+	public ResponseEntity<Utilisateur> leavePartieJoueur(@PathVariable("idutil") String idUtil, @PathVariable("idpartie") int idPartie) {
+		Utilisateur joueur = utilDao.findByPrimaryKey(idUtil);
+		Partie partie = partieDao.findByPrimaryKey(idPartie);
 		
-		// TODO
+		if (joueur == null || partie == null) {
+			return new ResponseEntity<Utilisateur>(joueur, HttpStatus.PRECONDITION_FAILED);
+		}
+		boolean isInPartie = false;
+		for (Utilisateur util : partie.getJoueurs()) {
+			if (util.getId().equals(idUtil)) {
+				isInPartie = true;
+			}
+		}
 		
-		return null;
+		if (!isInPartie) { // Si le joueur passé en url ne fait pas partie des joueurs de la partie
+			return new ResponseEntity<Utilisateur>(joueur, HttpStatus.PRECONDITION_REQUIRED);
+		}
+		
+		joueur.leavePartieJoueur(partie);
+		partieDao.update(partie);
+		utilDao.update(joueur);
+		// On supprime les associations entre ce joueur cette partie et son personnage
+		removeAssociationsJoueur(joueur, partie);
+		joueur = utilDao.findByPrimaryKey(idUtil);
+		return new ResponseEntity<Utilisateur>(joueur, HttpStatus.OK);
 	}
+	
+	private void removeAssociationsJoueur(Utilisateur joueur, Partie partie) {
+		List<AssociationPartieUtilisateurPersonnage> assos = assoDao.findByJoueurPartie(joueur, partie);
+		for (AssociationPartieUtilisateurPersonnage assoToRemove : assos) {
+			assoDao.delete(assoToRemove);
+		}
+	}
+	
+	@JsonView(Views.UtilisateurWithAll.class)
+	@GetMapping("/api/utilisateurs/partie/{idpartie}")
+	public ResponseEntity<List<Utilisateur>> findJoueursByPartie(@PathVariable("idpartie") int idPartie) {
+		Partie partie = partieDao.findByPrimaryKey(idPartie);
+		List<Utilisateur> list = new ArrayList<Utilisateur>();
+
+		if (partie == null) {
+			list = null;
+			return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.PRECONDITION_FAILED);
+		}
+		list = utilDao.findJoueursByPartie(partie);
+		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);		
+	}
+	
+	
 
 	
 	

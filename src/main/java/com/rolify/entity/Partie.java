@@ -131,6 +131,18 @@ public class Partie {
 		this.joueurs.add(joueur);
 	}
 	
+	public void removeJoueur(Utilisateur joueur) {
+		Utilisateur joueurToRemove = null;
+	    for (Utilisateur util : this.joueurs) {
+	    	if (util.getId().equals(joueur.getId())) {
+	    		joueurToRemove = util;
+	    	}
+	    }
+	    if (joueurToRemove != null) {
+	    	this.joueurs.remove(joueurToRemove);
+	    }
+	}
+	
 	public void changeMJ(Utilisateur mj) {
 		this.mj=mj;
 		mj.ajouterPartieMJ(this);

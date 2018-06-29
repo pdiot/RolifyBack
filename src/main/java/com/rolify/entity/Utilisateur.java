@@ -109,10 +109,23 @@ public class Utilisateur {
 	}
 
 	
-	public void ajouterPartieJoueur(Partie partie) { //crée association entre un joueur et une partie
+	public void joinPartieJoueur(Partie partie) { // ajoute le joueur à la liste des joueurs de la partie
 	    this.partiesJoueur.add(partie); 
 	    partie.addJoueur(this); 
 	 } 
+	
+	public void leavePartieJoueur(Partie partie) { // quitte la partie
+	    Partie partieToRemove = null;
+	    for (Partie part : this.partiesJoueur) {
+	    	if (part.getId() == partie.getId()) {
+	    		partieToRemove = part;
+	    	}
+	    }
+	    if (partieToRemove != null) {
+	    	this.partiesJoueur.remove(partieToRemove);
+		    partieToRemove.removeJoueur(this); 
+	    }
+	 }
 	
 	public void ajouterPartieMJ(Partie partie) {
 		this.partiesMJ.add(partie);
@@ -121,6 +134,11 @@ public class Utilisateur {
 	public void joinDiscussion(GroupeDiscussion groupe) {
 		this.groupes.add(groupe);
 		groupe.addUtilisateur(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", pseudo=" + pseudo + ", urlAvatar=" + urlAvatar + "]";
 	}
 	
 	
