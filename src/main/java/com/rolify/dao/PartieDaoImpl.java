@@ -62,9 +62,9 @@ public class PartieDaoImpl implements PartieDao{
 
 	@Override
 	public List<Partie> findByMj(Utilisateur utilisateurMj) {
-		String querystring = "select p from Partie p where p.mj == ?1";
+		String querystring = "select p from Partie p where p.mj = ?1";
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, utilisateurMj.getId());
+		query.setParameter(1, utilisateurMj);
 		
 		return (List<Partie>) query.getResultList();
 		
@@ -72,9 +72,9 @@ public class PartieDaoImpl implements PartieDao{
 
 	@Override
 	public List<Partie> findByJoueur(Utilisateur joueur) {
-		String querystring = "select p from Partie p where p.joueurs == ?1";
+		String querystring = "select p from Partie p join p.joueurs j where j = ?1";
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, joueur.getId());
+		query.setParameter(1, joueur);
 		
 		return (List<Partie>) query.getResultList();
 	}
@@ -82,7 +82,7 @@ public class PartieDaoImpl implements PartieDao{
 	@Override
 	public Partie findByPersonnage(Personnage personnage) {
 		
-		String querystring = "select p from Partie p where p.personnages == ?1";
+		String querystring = "select p from Partie p where p.personnages = ?1";
 		Query query = em.createQuery( querystring ) ;
 		query.setParameter(1, personnage.getId());
 		

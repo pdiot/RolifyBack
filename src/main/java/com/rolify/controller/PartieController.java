@@ -39,6 +39,38 @@ public class PartieController {
 		return new ResponseEntity<List<Partie>>(woners, HttpStatus.OK);
 	}
 	
+	@JsonView(Views.PartieWithAll.class)
+	@GetMapping("/api/parties/mj/{idmj}")
+	public ResponseEntity<List<Partie>> findByMj(@PathVariable("idmj") String idMj) {
+		Utilisateur mj = utilDao.findByPrimaryKey(idMj);
+		
+		List<Partie> list = null;
+		
+		if( mj == null) {
+			return new ResponseEntity<>(list, HttpStatus.PRECONDITION_FAILED);
+		}
+		
+		list = partieDao.findByMj(mj);
+		
+		return new ResponseEntity<List<Partie>>(list, HttpStatus.OK);
+	}
+	
+	@JsonView(Views.PartieWithAll.class)
+	@GetMapping("/api/parties/joueur/{idjoueur}")
+	public ResponseEntity<List<Partie>> findByJoueur(@PathVariable("idjoueur") String idJoueur) {
+		Utilisateur joueur = utilDao.findByPrimaryKey(idJoueur);
+		
+		List<Partie> list = null;
+		
+		if( joueur == null) {
+			return new ResponseEntity<>(list, HttpStatus.PRECONDITION_FAILED);
+		}
+		
+		list = partieDao.findByJoueur(joueur);
+		
+		return new ResponseEntity<List<Partie>>(list, HttpStatus.OK);
+	}
+	
 	@GetMapping("/api/parties/{id}")
 	@JsonView(Views.PartieWithAll.class)
 	public ResponseEntity<Partie> findOne(@PathVariable("id") Integer id) {
