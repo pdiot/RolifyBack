@@ -1,5 +1,6 @@
 package com.rolify.dao;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -29,7 +30,13 @@ public class MessageGlobalDAOImpl implements MessageGlobalDAO {
 		
 		crit.select(r);
 		
-		return em.createQuery(crit).getResultList();
+		List<MessageGlobal> tab = em.createQuery(crit).getResultList();
+		if (tab.size() > 20) {
+			return tab.subList(tab.size()-20, tab.size());        // return les 20 derniers chats
+		}
+		else {
+			return tab;
+		}
 	}
 
 	@Override
