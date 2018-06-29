@@ -33,6 +33,9 @@ public class Personnage {
 	@Column(length = 20)
 	private String sexe;
 	@JsonView(Views.Common.class)
+	@Column(length = 512)
+	private String urlAvatar;
+	@JsonView(Views.Common.class)
 	private int pv;
 	@JsonView(Views.Common.class)
 	private int fo;
