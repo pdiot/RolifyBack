@@ -69,10 +69,18 @@ public class AssociationPartieUtilisateurPersonnageDAOImpl implements Associatio
 
 	@Override
 	public List<AssociationPartieUtilisateurPersonnage> findByPartie(Partie partie) {
+		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.partie= ?1" ;
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(1, partie);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<AssociationPartieUtilisateurPersonnage> findAssoJoueursByPartie(Partie partie) {
 		String querystring = "select a from AssociationPartieUtilisateurPersonnage a  where a.partie= ?1 and a.role= ?2" ;
 		Query query = em.createQuery( querystring ) ;
 		query.setParameter(1, partie); 
-		query.setParameter(2, Role.MJ); 
+		query.setParameter(2, Role.JOUEUR); 
 		return query.getResultList();
 	}
 

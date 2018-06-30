@@ -1,5 +1,6 @@
 package com.rolify.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -77,6 +78,20 @@ public class PartieDaoImpl implements PartieDao{
 		query.setParameter(1, joueur);
 		
 		return (List<Partie>) query.getResultList();
+	}
+
+	@Override
+	public List<Partie> findNotIn(Utilisateur util) {
+		List<Partie> allParties = findAll();
+		List<Partie> partiesMj = findByMj(util);
+		List<Partie> partiesJoueur = findByJoueur(util);
+		List<Partie> partiesNotIn = new ArrayList<Partie>();
+		for (Partie partie : allParties) {
+			if (!partiesMj.contains(partie) && !partiesJoueur.contains(partie)) {
+				partiesNotIn.add(partie);
+			}
+		}
+		return partiesNotIn;
 	}
 
 	@Override

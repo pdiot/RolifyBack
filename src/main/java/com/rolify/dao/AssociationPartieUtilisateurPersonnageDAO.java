@@ -54,4 +54,10 @@ public interface AssociationPartieUtilisateurPersonnageDAO extends GenericDao <A
 	 * @return Renvoie les associations existantes entre les 3 paramètres (utilisée pour assurer l'unicité des associations)
 	 */
 	public List<AssociationPartieUtilisateurPersonnage> findByPartieUtilisateurPersonnage(Utilisateur utilisateur, Partie partie, Personnage personnage);
+	/**
+	 * 
+	 * @param partie
+	 * @return la liste des associations de role Joueur liées à cette partie
+	 */
+	public List<AssociationPartieUtilisateurPersonnage> findAssoJoueursByPartie(Partie partie);
 }

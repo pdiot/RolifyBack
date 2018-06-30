@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.rolify.dao.PersonnageDAO;
+import com.rolify.entity.AssociationPartieUtilisateurPersonnage;
+import com.rolify.entity.Partie;
 import com.rolify.entity.Personnage;
 import com.rolify.entity.Views;
 

@@ -71,6 +71,24 @@ public class PartieController {
 		return new ResponseEntity<List<Partie>>(list, HttpStatus.OK);
 	}
 	
+	@JsonView(Views.PartieWithAll.class)
+	@GetMapping("/api/parties/notin/{idjoueur}")
+	public ResponseEntity<List<Partie>> findNotIn(@PathVariable("idjoueur") String idJoueur) {
+		Utilisateur util = utilDao.findByPrimaryKey(idJoueur);
+		
+		List<Partie> list = null;
+		
+		if( util == null) {
+			return new ResponseEntity<>(list, HttpStatus.PRECONDITION_FAILED);
+		}
+		
+		list = partieDao.findNotIn(util);
+		
+		return new ResponseEntity<List<Partie>>(list, HttpStatus.OK);
+	}
+	
+	
+	
 	@GetMapping("/api/parties/{id}")
 	@JsonView(Views.PartieWithAll.class)
 	public ResponseEntity<Partie> findOne(@PathVariable("id") Integer id) {
