@@ -198,6 +198,41 @@ public class UtilisateurController {
 		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);		
 	}
 	
+	@JsonView(Views.UtilisateurWithAll.class)
+	@GetMapping("/api/utilisateurs/partie/mjDispos/{idpartie}")
+	public ResponseEntity<List<Utilisateur>> findMjDispos(@PathVariable("idpartie") int idPartie) {
+		Partie partie = partieDao.findByPrimaryKey(idPartie);
+		List<Utilisateur> list = new ArrayList<Utilisateur>();
+
+		if (partie == null) {
+			list = null;
+			return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.PRECONDITION_FAILED);
+		}
+		
+		List<Utilisateur> joueurs = utilDao.findJoueursByPartie(partie);
+		List<Utilisateur> all = utilDao.findAll();
+		Utilisateur mj = partie.getMj();
+		
+		for (Utilisateur util : all) {
+			boolean attrib = false;
+			for (Utilisateur joueur : joueurs) {
+				if (util.getId().equals(joueur.getId())) {
+					attrib = true;
+				}
+			}
+			if (util.getId().equals(mj.getId())) {
+				attrib = true;
+			}
+			if (!attrib) {
+				list.add(util);
+			}
+		}
+		
+		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);		
+	}
+	
+	
+	
 	
 
 	

@@ -40,7 +40,7 @@ public class Partie {
 	@Column(length = 4000)
 	private String description;
 	@JsonView(Views.Common.class)
-	private int nombreDeJoueurs;
+	private int nombreJoueurs;
 	
 	@ManyToMany (mappedBy="partiesJoueur", fetch=FetchType.EAGER)
 	@JsonView(Views.PartieWithJoueurs.class)
