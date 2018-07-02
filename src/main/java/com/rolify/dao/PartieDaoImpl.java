@@ -95,13 +95,13 @@ public class PartieDaoImpl implements PartieDao{
 	}
 
 	@Override
-	public Partie findByPersonnage(Personnage personnage) {
+	public List<Partie> findByPersonnage(Personnage personnage) {
 		
 		String querystring = "select p from Partie p where p.personnages = ?1";
 		Query query = em.createQuery( querystring ) ;
 		query.setParameter(1, personnage.getId());
 		
-		return (Partie) query.getResultList();
+		return (List<Partie>) query.getResultList();
 	}
 
 }
