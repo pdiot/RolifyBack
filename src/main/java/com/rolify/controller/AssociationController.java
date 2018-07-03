@@ -68,6 +68,16 @@ public class AssociationController {
 		
 		return new ResponseEntity<List<AssociationPartieUtilisateurPersonnage>>(associations, HttpStatus.OK);
 	}
+	
+	@JsonView(Views.AssociationWithAll.class)
+	@GetMapping("/api/assos/partie/{idPartie}/joueur/{idJoueur}")
+	public ResponseEntity<List<AssociationPartieUtilisateurPersonnage>> findByJoueurPartie(@PathVariable("idPartie") Integer idPartie, @PathVariable("idJoueur") String idJoueur) {
+		Partie partie = partieDao.findByPrimaryKey(idPartie);
+		Utilisateur joueur = utilDao.findByPrimaryKey(idJoueur);
+		List<AssociationPartieUtilisateurPersonnage> associations = assoDAO.findByJoueurPartie(joueur, partie);
+		
+		return new ResponseEntity<List<AssociationPartieUtilisateurPersonnage>>(associations, HttpStatus.OK);
+	}
 
 	@JsonView(Views.AssociationWithAll.class)
 	@DeleteMapping("/api/assos/{id}")
