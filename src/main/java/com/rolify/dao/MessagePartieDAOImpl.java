@@ -32,6 +32,16 @@ public class MessagePartieDAOImpl implements MessagePartieDAO {
 		
 		return em.createQuery(crit).getResultList();
 	}
+	
+	/*public List<MessagePartie> findAllPartie(Integer id) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<MessagePartie> crit = cb.createQuery(MessagePartie.class);
+		Root<MessagePartie> r = crit.from(MessagePartie.class);
+		
+		crit.select(r);
+		
+		return em.createQuery(crit).getResultList();
+	}*/
 
 	@Override
 	public MessagePartie save(MessagePartie entity) {
@@ -57,10 +67,10 @@ public class MessagePartieDAOImpl implements MessagePartieDAO {
 	}
 
 	@Override
-	public List<MessagePartie> findByPartie(Partie partie) {
-		String querystring = "select m from MessagePartie m  where m.partie= ?1";
+	public List<MessagePartie> findByPartie(Integer Idpartie) {
+		String querystring = "select m from MessagePartie m  where m.partie.id= ?1";
 		Query query = em.createQuery( querystring ) ;
-		query.setParameter(1, partie); //set Parameter here
+		query.setParameter(1, Idpartie); //set Parameter here
 		return query.getResultList();
 	}
 

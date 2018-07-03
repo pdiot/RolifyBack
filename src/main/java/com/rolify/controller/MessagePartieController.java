@@ -27,15 +27,15 @@ public class MessagePartieController {
 	MessagePartieDAO messDao;
 
 	@JsonView(Views.MessageWithAll.class)
-	@GetMapping("/api/messagespartie")
-	public ResponseEntity<List<MessagePartie>> findAll() {
-		List<MessagePartie> woners = messDao.findAll();
+	@GetMapping("/api/messagespartie/{idPartie}")
+	public ResponseEntity<List<MessagePartie>> findAll(@PathVariable("idPartie") Integer idPartie) {
+		List<MessagePartie> woners = messDao.findByPartie(idPartie);
 		return new ResponseEntity<List<MessagePartie>>(woners, HttpStatus.OK);
 	}
 
-	@JsonView(Views.MessageWithAll.class)
-	@GetMapping("/api/messagespartie/{id}")
-	public ResponseEntity<MessagePartie> findOne(@PathVariable("id") Integer id) {
+	/*@JsonView(Views.MessageWithAll.class)
+	@GetMapping("/api/messagespartie/{idPartie}/{idMsg}")
+	public ResponseEntity<MessagePartie> findOne(@PathVariable("idPartie") Integer idPartie) {
 		MessagePartie ownr = messDao.findByPrimaryKey(id);
 		
 		if (ownr == null) {
@@ -43,7 +43,7 @@ public class MessagePartieController {
 		}
 		
 		return new ResponseEntity<MessagePartie>(ownr, HttpStatus.OK);
-	}
+	}*/
 
 	@JsonView(Views.MessageWithAll.class)
 	@DeleteMapping("/api/messagespartie/{id}")

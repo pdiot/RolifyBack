@@ -12,7 +12,7 @@ public interface MessagePartieDAO extends GenericDao<MessagePartie, Integer> {
 	 * @param partie
 	 * @return la liste des messages envoyés dans cette partie
 	 */
-	public List<MessagePartie> findByPartie(Partie partie);
+	public List<MessagePartie> findByPartie(Integer Idpartie);
 	
 	/**
 	 * 
