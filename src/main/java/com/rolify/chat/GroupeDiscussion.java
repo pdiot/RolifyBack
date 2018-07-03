@@ -72,6 +72,12 @@ public class GroupeDiscussion {
 	public void setMessages(Set<MessagePrive> messages) {
 		this.messages = messages;
 	}
+
+
+	public GroupeDiscussion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	public void addUtilisateur(Utilisateur utilisateur) {
 		this.utilisateurs.add(utilisateur);
